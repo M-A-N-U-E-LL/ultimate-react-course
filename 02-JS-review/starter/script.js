@@ -142,3 +142,107 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+
+const book = getBook(2);
+// const title = book.title;
+// const author = book.author;
+
+book;
+// Rest operator
+const {title, author, pages, publicationDate, genres, hasMovieAdaptation} = book;
+
+// const primaryGenre = genres[0];
+// const secondGenre = genres[1];
+genres
+
+// Spread Operator
+const [primaryGenre, secondGenre, adventure, ...otherGenres] = genres
+
+// console.log({primaryGenre, secondGenre, adventure, otherGenres});
+
+// const newGenres = [...genres, 'epic fantasy']
+const newGenres = ['epic fantasy', ...genres];
+// newGenres
+
+// const updateBook = {book, moviePublicationDate: '2001-12-19'};
+const updateBook = {
+  ...book, 
+  // Adding a new property
+  moviePublicationDate: '2001-12-19',
+  // Overwriting an existing property
+  pages: 1210,
+};
+// console.log(updateBook)
+
+// const info = document.getElementById('info');
+const summary = 
+  `
+    Title of the book: ${title}\n
+    Author's name: ${author}\n
+    Pages: ${pages}\n
+    Publication date: ${publicationDate}\n
+    Genres: -${genres.join("\n -")}\n
+    Movie adaptation: ${hasMovieAdaptation}
+  `
+;
+
+// info.innerText = summary;
+
+// const summary = 
+//   "Title of the book: <b>" 
+//   + title + "</b><br>" 
+//   + "Author's name: <b>" + author + "</b><br>"
+//   + "Pages: <b>" + pages + "</b><br>"
+//   // + "Publication date: <b>" + publicationDate + "</b><br>"
+//   + "Publication date: <b>" + publicationDate.split("-") + "</b><br>"
+//   + "Genres: -<b>" + genres.join("<br> -") + "</b><br>"
+//   + "Movie adaptation: <b>" + hasMovieAdaptation + "</b>"
+// ;
+
+// info.innerHTML = summary;
+
+// console.log(summary)
+// summary
+
+// pages > 1000 ? "Greater than one thousand" : "Less than one thousand"
+const pageRange = pages > 1000 ? "Over 1000" : "Less than 1000"
+// pageRange;
+
+function getYear(str) {
+  return str.split("-")[0];
+}
+
+// console.log(getYear(publicationDate))
+
+const getMoth = (str) => str.split("-")[1]
+// console.log(getMoth(publicationDate));
+
+const getDay = (str) => str.split("-")[2]
+// console.log(getDay(publicationDate));
+
+// Short circuiting and logical operators
+// Look at the first value and not even look at the second value
+
+console.log(true && "Some string");
+console.log(false && "Some string");
+console.log(hasMovieAdaptation && "This book has a movie");
+
+// falsy: 0, '', null, undefined
+console.log("Jonas" && "Some string");
+console.log(0 && "Hola");
+
+console.log(true || "Some string");
+console.log(false || "Some string");
+
+const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
+console.log(spanishTranslation);
+
+// In this case we want countWrong to be 0 but that's not posible because 0 is "falsy" so that's why return "No Data"
+const countWrong = book.reviews.librarything.reviewsCount || "No Data";
+console.log(countWrong);
+
+
+// Nullish coalecing operator
+// Nullish will only return the second value when the first value is null or undefined
+const count = book.reviews.librarything.reviewsCount ?? "No Data";
+count;
